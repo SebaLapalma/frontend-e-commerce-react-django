@@ -11,12 +11,9 @@ import {
     ORDER_PAY_REQUEST,
     ORDER_PAY_SUCCESS,
     ORDER_PAY_FAIL,
-    ORDER_PAY_RESET,
 
     MP_REQUEST,
     MP_SUCCESS,
-    MP_FAIL,
-    MP_RESET,
 } from '../constants/orderConstants'
 
 import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
@@ -39,7 +36,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
         }
 
         const {data} = await axios.post(
-            `http://localhost:8000/api/order/add/`,
+            `http://24.144.90.143/api/order/add/`,
             order,
             config
         )
@@ -84,7 +81,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
         }
 
         const {data} = await axios.get(
-            `http://localhost:8000/api/order/${id}/`,
+            `http://24.144.90.143/api/order/${id}/`,
             config
         )
 
@@ -121,7 +118,7 @@ export const payOrder = (id, paymentResult) => async (dispatch, getState) => {
         }
 
         const {data} = await axios.put(
-            `http://localhost:8000/api/order/${id}/pay`,
+            `http://24.144.90.143/api/order/${id}/pay`,
             paymentResult,
             config
         )
@@ -159,7 +156,7 @@ export const mpOrder = (id, paymentResult) => async (dispatch, getState) => {
         }
 
         const {data} = await axios.put(
-            `http://localhost:8000/api/order/${id}/mercadopago`,
+            `http://24.144.90.143/api/order/${id}/mercadopago`,
             paymentResult,
             config
         )

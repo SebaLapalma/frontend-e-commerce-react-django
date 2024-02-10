@@ -112,7 +112,7 @@ function ProductScreen() {
                     </ListGroup.Item>
     
                     <ListGroup.Item>
-                      <Button onClick={addToCartHandler} className='btn-block' disabled= {product.stock == 0 }type='button'>
+                      <Button onClick={addToCartHandler} className='btn-block' disabled= {product.stock === 0 }type='button'>
                         Añadir al carrito
                       </Button>
                     </ListGroup.Item>

@@ -19,7 +19,6 @@ import {
     USER_UPDATE_PROFILE_REQUEST, 
     USER_UPDATE_PROFILE_SUCCESS,
     USER_UPDATE_PROFILE_FAIL,
-    USER_UPDATE_PROFILE_RESET,
 } from '../constants/userConstants'
 
 export const login = (email, password) => async (dispatch) => {
@@ -35,7 +34,7 @@ export const login = (email, password) => async (dispatch) => {
         }
 
         const {data} = await axios.post(
-            'http://localhost:8000/api/users/login/',
+            'http://24.144.90.143/api/users/login/',
             {'username': email, 'password': password},
             config
         )
@@ -76,7 +75,7 @@ export const register = (name, email, password) => async (dispatch) => {
         }
 
         const {data} = await axios.post(
-            'http://localhost:8000/api/users/register/',
+            'http://24.144.90.143/api/users/register/',
             {'name': name, 'email': email, 'password': password},
             config
         )
@@ -120,7 +119,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
         }
 
         const {data} = await axios.get(
-            `http://localhost:8000/api/users/${id}/`,
+            `http://24.144.90.143/api/users/${id}/`,
             config
         )
 
@@ -158,7 +157,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
         }
 
         const {data} = await axios.put(
-            `http://localhost:8000/api/users/profile/update/`,
+            `http://24.144.90.143/api/users/profile/update/`,
             user,
             config
         )

@@ -8,8 +8,11 @@ import CheckoutSteps from '../components/CheckoutSteps'
 import { redirect, useLocation, useNavigate } from 'react-router-dom'
 import { createOrder } from '../actions/orderActions'
 import { ORDER_CREATE_RESET } from '../constants/orderConstants'
+import { Wallet, initMercadoPago } from '@mercadopago/sdk-react'
+import axios from 'axios'
 
 function PlaceOrderScreen() {
+    const [preferenceId, setPreferenceId] = useState(null)
 
     const orderCreate = useSelector(state => state.orderCreate)
 
@@ -52,6 +55,34 @@ function PlaceOrderScreen() {
             totalPrice: cart.totalPrice,
         }))
     )
+
+    initMercadoPago('TEST-bc16cac7-44f6-4ad7-8460-7073b9bb1ce2')
+
+
+    const createPreference = async () => {
+        try {
+            const response = await axios.post('http://localhost:8080/create_preference', {
+                    description: 'laura',
+                    price: 1,
+                    quantity: 1,
+                }
+            )
+            const { id } = response.data
+            console.log(response.data)
+            return id
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handleBuy = async () => {
+        const id = await createPreference()
+        if (id) {
+            setPreferenceId(id)
+        }
+        console.log(preferenceId)
+    }
+
     return (
         <div>
             <CheckoutSteps step1 step2 step3 step4 />
@@ -160,9 +191,10 @@ function PlaceOrderScreen() {
                                 type='button'
                                 className='btn-block'
                                 disabled={cart.cartItems === 0}
-                                onClick={placeOrder}>
+                                onClick={handleBuy}>
                                     Confirmar compra
                                 </Button>
+                                {preferenceId && <Wallet initialization={{preferenceId}} />}
                             </ListGroup.Item>
                         </ListGroup>
                     </Card>

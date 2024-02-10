@@ -1,18 +1,41 @@
 import React, {useState, useEffect} from 'react'
-import { Button, Col, Row, ListGroup, Image, Card } from 'react-bootstrap'
+import { Col, Row, ListGroup, Image, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import FormContainer from '../components/FormContainer'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { redirect, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { getOrderDetails } from '../actions/orderActions'
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import axios from 'axios'
 
 function OrderScreen() {
-    
-    initMercadoPago('TEST-d56b6131-9b6d-4a28-92df-6d54957ae376')
 
+    const [preferenceId, setPreferenceId] = useState(null)
+  
+    initMercadoPago('TEST-bc16cac7-44f6-4ad7-8460-7073b9bb1ce2')
+
+    const createPreference = async () => {
+        try{
+            const response = await axios.get('http://localhost:8080/create_preference', {
+            description: order.item,
+            price: order.itemsPrice,
+            quantity: order.qty,
+        })
+
+        const { id } = response.data
+        return id
+        } catch (error) {
+        console.log(error)
+    }
+
+    const handleBuy = async () => {
+        const id = await createPreference()
+        if (id) {
+            setPreferenceId(id)
+        }
+    }
+    
     const {id} = useParams()
 
     const orderId = Number(id)
@@ -151,10 +174,10 @@ function OrderScreen() {
                                     </Col>
                                 </Row>
                             </ListGroup.Item>
-                                <div id="wallet_container">
-                                    <Wallet initialization={{ preferenceId: 'wallet_container' }} />
-                                </div>
+                                
                             <ListGroup.Item>
+                                <button onClick={handleBuy}>Comprar</button>
+                                {preferenceId && <Wallet initialization={{ preferenceId }} />}
                             </ListGroup.Item>
                             
                         </ListGroup>
@@ -163,6 +186,7 @@ function OrderScreen() {
             </Row>
         </div>
   )
+}
 }
 
 export default OrderScreen

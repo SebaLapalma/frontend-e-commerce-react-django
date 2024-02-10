@@ -24,7 +24,7 @@ function Header() {
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <LinkContainer to='/'>
-          <Navbar.Brand href="/">Internacionales Bagués</Navbar.Brand>
+          <Navbar.Brand href="/">NUNA FRAGANCIAS</Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
