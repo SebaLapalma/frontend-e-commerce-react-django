@@ -1,18 +1,14 @@
-import React, {useState, useEffect} from 'react'
+import React, { useEffect} from 'react'
 import { Button, Col, Row, ListGroup, Image, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import FormContainer from '../components/FormContainer'
 import Message from '../components/Message'
 import CheckoutSteps from '../components/CheckoutSteps'
-import { redirect, useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { createOrder } from '../actions/orderActions'
 import { ORDER_CREATE_RESET } from '../constants/orderConstants'
-import { Wallet, initMercadoPago } from '@mercadopago/sdk-react'
-import axios from 'axios'
 
 function PlaceOrderScreen() {
-    const [preferenceId, setPreferenceId] = useState(null)
 
     const orderCreate = useSelector(state => state.orderCreate)
 
@@ -56,32 +52,6 @@ function PlaceOrderScreen() {
         }))
     )
 
-    initMercadoPago('TEST-bc16cac7-44f6-4ad7-8460-7073b9bb1ce2')
-
-
-    const createPreference = async () => {
-        try {
-            const response = await axios.post('http://localhost:8080/create_preference', {
-                    description: 'laura',
-                    price: 1,
-                    quantity: 1,
-                }
-            )
-            const { id } = response.data
-            console.log(response.data)
-            return id
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const handleBuy = async () => {
-        const id = await createPreference()
-        if (id) {
-            setPreferenceId(id)
-        }
-        console.log(preferenceId)
-    }
 
     return (
         <div>
@@ -191,10 +161,9 @@ function PlaceOrderScreen() {
                                 type='button'
                                 className='btn-block'
                                 disabled={cart.cartItems === 0}
-                                onClick={handleBuy}>
+                                onClick={placeOrder}>
                                     Confirmar compra
                                 </Button>
-                                {preferenceId && <Wallet initialization={{preferenceId}} />}
                             </ListGroup.Item>
                         </ListGroup>
                     </Card>

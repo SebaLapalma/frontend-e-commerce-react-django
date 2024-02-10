@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { Form, Button, Row, Col, NavItem } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
@@ -15,7 +15,6 @@ function ProfileScreen() {
     const [message, setMessage] = useState('')
 
     const dispatch = useDispatch();
-    const location = useLocation();
     const navigate = useNavigate();
 
     const userDetails = useSelector(state => state.userDetails)
@@ -46,7 +45,7 @@ function ProfileScreen() {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        if(password != confirmPassword){
+        if(password !== confirmPassword){
             setMessage('¡Las contraseñas no coinciden!')
         } else{
             dispatch(updateUserProfile({

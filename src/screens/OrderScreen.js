@@ -1,41 +1,14 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import { Col, Row, ListGroup, Image, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { redirect, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { getOrderDetails } from '../actions/orderActions'
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
-import axios from 'axios'
 
 function OrderScreen() {
 
-    const [preferenceId, setPreferenceId] = useState(null)
-  
-    initMercadoPago('TEST-bc16cac7-44f6-4ad7-8460-7073b9bb1ce2')
-
-    const createPreference = async () => {
-        try{
-            const response = await axios.get('http://localhost:8080/create_preference', {
-            description: order.item,
-            price: order.itemsPrice,
-            quantity: order.qty,
-        })
-
-        const { id } = response.data
-        return id
-        } catch (error) {
-        console.log(error)
-    }
-
-    const handleBuy = async () => {
-        const id = await createPreference()
-        if (id) {
-            setPreferenceId(id)
-        }
-    }
-    
     const {id} = useParams()
 
     const orderId = Number(id)
@@ -45,8 +18,6 @@ function OrderScreen() {
     const {order, error, loading} = orderDetails
 
     const dispatch = useDispatch()
-
-    const navigate = useNavigate()
 
     if (!loading && !error){
         order.itemsPrice = order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
@@ -176,8 +147,7 @@ function OrderScreen() {
                             </ListGroup.Item>
                                 
                             <ListGroup.Item>
-                                <button onClick={handleBuy}>Comprar</button>
-                                {preferenceId && <Wallet initialization={{ preferenceId }} />}
+                                <button>Comprar</button>
                             </ListGroup.Item>
                             
                         </ListGroup>
@@ -187,6 +157,6 @@ function OrderScreen() {
         </div>
   )
 }
-}
+
 
 export default OrderScreen
