@@ -34,7 +34,7 @@ export const login = (email, password) => async (dispatch) => {
         }
 
         const {data} = await axios.post(
-            'http://24.144.90.143/api/users/login/',
+            'https://24.144.90.143/api/users/login/',
             {'username': email, 'password': password},
             config
         )
@@ -75,7 +75,7 @@ export const register = (name, email, password) => async (dispatch) => {
         }
 
         const {data} = await axios.post(
-            'http://24.144.90.143/api/users/register/',
+            'https://24.144.90.143/api/users/register/',
             {'name': name, 'email': email, 'password': password},
             config
         )
@@ -119,7 +119,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
         }
 
         const {data} = await axios.get(
-            `http://24.144.90.143/api/users/${id}/`,
+            `https://24.144.90.143/api/users/${id}/`,
             config
         )
 
@@ -157,7 +157,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
         }
 
         const {data} = await axios.put(
-            `http://24.144.90.143/api/users/profile/update/`,
+            `https://24.144.90.143/api/users/profile/update/`,
             user,
             config
         )
