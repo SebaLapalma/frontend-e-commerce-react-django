@@ -15,7 +15,7 @@ export const listProducts = () => async (dispatch) => {
     try{
         dispatch({type:PRODUCT_LIST_REQUEST})
 
-        const { data } = await axios.get('https://24.144.90.143/api/products/')
+        const { data } = await axios.get('https://nunafraganciasback.com/api/products/')
 
         console.log(data)
 
@@ -38,7 +38,7 @@ export const listProductDetails = (id) => async (dispatch) => {
     try{
         dispatch({type:PRODUCT_DETAILS_REQUEST})
 
-        const { data } = await axios.get(`https://24.144.90.143/api/products/${id}`)
+        const { data } = await axios.get(`https://nunafraganciasback.com/api/products/${id}`)
 
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,

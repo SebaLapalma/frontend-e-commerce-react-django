@@ -36,7 +36,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
         }
 
         const {data} = await axios.post(
-            `https://24.144.90.143/api/order/add/`,
+            `https://nunafraganciasback.com/api/order/add/`,
             order,
             config
         )
@@ -81,7 +81,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
         }
 
         const {data} = await axios.get(
-            `https://24.144.90.143/api/order/${id}/`,
+            `https://nunafraganciasback.com/api/order/${id}/`,
             config
         )
 
@@ -118,7 +118,7 @@ export const payOrder = (id, paymentResult) => async (dispatch, getState) => {
         }
 
         const {data} = await axios.put(
-            `https://24.144.90.143/api/order/${id}/pay`,
+            `https://nunafraganciasback.com/api/order/${id}/pay`,
             paymentResult,
             config
         )
@@ -156,7 +156,7 @@ export const mpOrder = (id, paymentResult) => async (dispatch, getState) => {
         }
 
         const {data} = await axios.put(
-            `https://24.144.90.143/api/order/${id}/mercadopago`,
+            `https://nunafraganciasback.com/api/order/${id}/mercadopago`,
             paymentResult,
             config
         )

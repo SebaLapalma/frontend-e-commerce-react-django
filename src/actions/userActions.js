@@ -34,7 +34,7 @@ export const login = (email, password) => async (dispatch) => {
         }
 
         const {data} = await axios.post(
-            'https://24.144.90.143/api/users/login/',
+            'https://nunafraganciasback.com/api/users/login/',
             {'username': email, 'password': password},
             config
         )
@@ -75,7 +75,7 @@ export const register = (name, email, password) => async (dispatch) => {
         }
 
         const {data} = await axios.post(
-            'https://24.144.90.143/api/users/register/',
+            'https://nunafraganciasback.com/api/users/register/',
             {'name': name, 'email': email, 'password': password},
             config
         )
@@ -119,7 +119,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
         }
 
         const {data} = await axios.get(
-            `https://24.144.90.143/api/users/${id}/`,
+            `https://nunafraganciasback.com/api/users/${id}/`,
             config
         )
 
@@ -157,7 +157,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
         }
 
         const {data} = await axios.put(
-            `https://24.144.90.143/api/users/profile/update/`,
+            `https://nunafraganciasback.com/api/users/profile/update/`,
             user,
             config
         )
