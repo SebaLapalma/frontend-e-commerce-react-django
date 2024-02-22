@@ -55,7 +55,7 @@ function Header() {
               <a style={{ textDecoration: 'none' }} rel='noopener noreferrer' href='https://www.facebook.com/profile.php?id=100088168151860' target='_blank'>Facebook</a>
               </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
-                <a style={{ textDecoration: 'none' }} rel='noopener noreferrer' href='https://www.https://www.instagram.com/nuna.fragancias/' target='_blank'>Instagram</a>
+                <a style={{ textDecoration: 'none' }} rel='noopener noreferrer' href='https://www.instagram.com/nuna.fragancias/' target='_blank'>Instagram</a>
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
