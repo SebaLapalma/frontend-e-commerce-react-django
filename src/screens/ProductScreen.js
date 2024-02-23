@@ -4,7 +4,6 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Button, Card, Form } from 'react-bootstrap'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import Rating from '../components/Rating'
 import { listProductDetails } from '../actions/productActions'
 
 function ProductScreen() {
@@ -44,9 +43,9 @@ function ProductScreen() {
                     <h3>{product.name}</h3>
                   </ListGroup.Item>
                   
-                  <ListGroup.Item>
+                  {/* <ListGroup.Item>
                     <Rating value={product.rating} text={`${product.numReviews} reseñas`} color={'#f8e825'} />
-                  </ListGroup.Item>
+                  </ListGroup.Item> */}
                   
                   <ListGroup.Item>
                     {product.description}

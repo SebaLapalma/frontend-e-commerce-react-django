@@ -46,7 +46,7 @@ function Header() {
                   </NavDropdown.Item>
               </NavDropdown>
             ) : (
-              <LinkContainer to="/login">
+            <LinkContainer to="/login">
               <Nav.Link ><i className='fas fa-user'></i>Login</Nav.Link>
             </LinkContainer>
             )}
@@ -60,10 +60,12 @@ function Header() {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">Bagues 50ml</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-              Homenaje
-            </Nav.Link>
+          <LinkContainer to="/50ml">
+              <Nav.Link >50ml</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/homenaje">
+              <Nav.Link >Homenaje</Nav.Link>
+          </LinkContainer>
             <NavDropdown title="Otros" id="collasible-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">
                 <a style={{ textDecoration: 'none' }} rel='noopener noreferrer' href='/decoesencias'>DecoEsencias</a>

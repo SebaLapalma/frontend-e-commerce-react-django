@@ -15,6 +15,8 @@ import ShippingScreen from './screens/ShippingScreen'
 import PaymentScreen from './screens/PaymentScreen'
 import PlaceOrderScreen from './screens/PlaceOrderScreen'
 import OrderScreen from './screens/OrderScreen'
+import FiftyScreen from './screens/FiftyScreen'
+import HomenajeScreen from './screens/HomenajeScreen'
 
 
 
@@ -33,6 +35,8 @@ function App() {
             <Route exact path='/payment' element={<PaymentScreen/>} />
             <Route exact path='/placeorder' element={<PlaceOrderScreen/>} />
             <Route exact path='/order/:id' element={<OrderScreen/>} />
+            <Route exact path='/50ml' element={<FiftyScreen />} />
+            <Route exact path='homenaje' element={<HomenajeScreen />} />
             <Route path='/product/:id' element={<ProductScreen/>} />
             <Route path='/cart/:id?' element={<CartScreen/>} />
           </Routes>
