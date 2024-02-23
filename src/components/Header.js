@@ -66,14 +66,14 @@ function Header() {
           <LinkContainer to="/homenaje">
               <Nav.Link >Homenaje</Nav.Link>
           </LinkContainer>
-            <NavDropdown title="Otros" id="collasible-nav-dropdown">
+            {/* <NavDropdown title="Otros" id="collasible-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">
                 <a style={{ textDecoration: 'none' }} rel='noopener noreferrer' href='/decoesencias'>DecoEsencias</a>
               </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
                 <a style={{ textDecoration: 'none' }} rel='noopener noreferrer' href='/vespero'>Véspero</a>
               </NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown> */}
           </Nav>
         </Navbar.Collapse>
       </Container>
