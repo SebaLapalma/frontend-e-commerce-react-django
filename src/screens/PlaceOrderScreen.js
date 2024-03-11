@@ -186,8 +186,7 @@ function PlaceOrderScreen() {
                                 type='button'
                                 className='btn-block'
                                 disabled={cart.cartItems === 0}
-                                onClick={handlePlaceOrder}
-                                onSubmit={submitHandler}>
+                                onClick={handlePlaceOrder}>
                                     Confirmar compra
                                 </Button>
                             </ListGroup.Item>

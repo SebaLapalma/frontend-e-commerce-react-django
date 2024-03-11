@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import { Col, Row, ListGroup, Image, Card, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -8,6 +8,8 @@ import { useParams } from 'react-router-dom'
 import { getOrderDetails } from '../actions/orderActions'
 
 function OrderScreen() {
+
+    const navigate = useNavigate()
 
     const {id} = useParams()
 
@@ -22,12 +24,6 @@ function OrderScreen() {
     if (!loading && !error){
         order.itemsPrice = order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
     }
-      
-    useEffect(() => {
-        if(!order || order._id !== Number(orderId)){
-            dispatch(getOrderDetails(orderId))
-        }         
-    }, [dispatch, order, orderId])
 
     useEffect(() => {
         if (!order || order._id !== Number(orderId)) {
@@ -42,6 +38,11 @@ function OrderScreen() {
       }, [dispatch, order, orderId]);
 
     console.log()
+
+    const submitHandler = (e) =>{
+        e.preventDefault()
+        navigate('/')
+    }
 
     return loading ? (
         <Loader />
@@ -164,9 +165,9 @@ function OrderScreen() {
                                 <Button
                                     type='button'
                                     className='btn-block'
-                                    
+                                    onClick={submitHandler}
                                     >
-                                    Comprar
+                                    Confirmar
                                 </Button>
                             </ListGroup.Item>
                             
