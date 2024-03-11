@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import { Col, Row, ListGroup, Image, Card } from 'react-bootstrap'
+import { Col, Row, ListGroup, Image, Card, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
@@ -28,6 +28,20 @@ function OrderScreen() {
             dispatch(getOrderDetails(orderId))
         }         
     }, [dispatch, order, orderId])
+
+    useEffect(() => {
+        if (!order || order._id !== Number(orderId)) {
+          dispatch(getOrderDetails(orderId));
+        } else {
+          // Realizar acciones adicionales después de cargar los detalles del pedido
+          // Puedes ajustar esto según tus necesidades
+          const orderDetailsString = JSON.stringify(order, null, 2);
+          const whatsappMessage = `¡Pedido realizado!\nDetalles del pedido:\n${orderDetailsString}`;
+          // Puedes utilizar 'whatsappMessage' como desees
+        }
+      }, [dispatch, order, orderId]);
+
+    console.log()
 
     return loading ? (
         <Loader />
@@ -147,7 +161,13 @@ function OrderScreen() {
                             </ListGroup.Item>
                                 
                             <ListGroup.Item>
-                                <button>Comprar</button>
+                                <Button
+                                    type='button'
+                                    className='btn-block'
+                                    
+                                    >
+                                    Comprar
+                                </Button>
                             </ListGroup.Item>
                             
                         </ListGroup>

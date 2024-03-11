@@ -41,17 +41,33 @@ function PlaceOrderScreen() {
         }
     }, [success, navigate])
 
-    const placeOrder = () => (
-        dispatch(createOrder({
-            orderItems: cart.cartItems,
-            shippingAddress: cart.shippingAddress,
-            paymentMethod: cart.paymentMethod,
-            itemsPrice: cart.itemsPrice,
-            shippingPrice: cart.shippingPrice,
-            totalPrice: cart.totalPrice,
-        }))
-    )
+    const placeOrder = () => {
+        const orderDetails = {
+          orderItems: cart.cartItems,
+          shippingAddress: cart.shippingAddress,
+          paymentMethod: cart.paymentMethod,
+          itemsPrice: cart.itemsPrice,
+          shippingPrice: cart.shippingPrice,
+          totalPrice: cart.totalPrice,
+        };
+      
+        dispatch(createOrder(orderDetails));
+        return orderDetails;
+      };
 
+      const handlePlaceOrder = () => {
+        const orderDetails = placeOrder();
+      
+        // Convertir el objeto a cadena de texto
+        const orderDetailsString = JSON.stringify(orderDetails, null, 2);
+      
+        // Utilizar la cadena de texto para enviar un mensaje a WhatsApp (reemplaza 'tuNumero' con el número de WhatsApp deseado)
+        const whatsappMessage = `¡Pedido realizado!\nDetalles del pedido:\n${orderDetailsString}`;
+        const whatsappLink = `https://wa.me/+543454019821/?text=${encodeURIComponent(whatsappMessage)}`;
+      
+        // Redirigir a WhatsApp
+        window.location.href = whatsappLink;
+      };
 
     return (
         <div>
@@ -161,7 +177,7 @@ function PlaceOrderScreen() {
                                 type='button'
                                 className='btn-block'
                                 disabled={cart.cartItems === 0}
-                                onClick={placeOrder}>
+                                onClick={handlePlaceOrder}>
                                     Confirmar compra
                                 </Button>
                             </ListGroup.Item>
