@@ -58,16 +58,25 @@ function PlaceOrderScreen() {
       const handlePlaceOrder = () => {
         const orderDetails = placeOrder();
       
-        // Convertir el objeto a cadena de texto
-        const orderDetailsString = JSON.stringify(orderDetails, null, 2);
+        // Crear una lista de nombres de productos separados por coma y espacio
+        const productNames = orderDetails.orderItems.map(item => item.name).join(', ');
       
-        // Utilizar la cadena de texto para enviar un mensaje a WhatsApp (reemplaza 'tuNumero' con el número de WhatsApp deseado)
-        const whatsappMessage = `¡Pedido realizado!\nDetalles del pedido:\n${orderDetailsString}`;
-        const whatsappLink = `https://wa.me/+543454019821/?text=${encodeURIComponent(whatsappMessage)}`;
+        // Construir el mensaje de WhatsApp
+        const whatsappMessage = `¡Pedido realizado!\nDetalles del pedido:\n\n` +
+          `Producto(s): ${productNames}\n` +
+          `Dirección: ${orderDetails.shippingAddress.address}, ${orderDetails.shippingAddress.city}, ${orderDetails.shippingAddress.postalCode}, ${orderDetails.shippingAddress.country}\n` +
+          `Total: $${orderDetails.totalPrice}`;
       
-        // Redirigir a WhatsApp
-        window.location.href = whatsappLink;
+        const whatsappLink = `https://wa.me/+543455083098/?text=${encodeURIComponent(whatsappMessage)}`;
+      
+        // Abrir WhatsApp en una nueva pestaña
+        window.open(whatsappLink, '_blank');
       };
+
+      const submitHandler = (e) =>{
+        e.preventDefault()
+        navigate('/')
+    }
 
     return (
         <div>
@@ -177,7 +186,8 @@ function PlaceOrderScreen() {
                                 type='button'
                                 className='btn-block'
                                 disabled={cart.cartItems === 0}
-                                onClick={handlePlaceOrder}>
+                                onClick={handlePlaceOrder}
+                                onSubmit={submitHandler}>
                                     Confirmar compra
                                 </Button>
                             </ListGroup.Item>

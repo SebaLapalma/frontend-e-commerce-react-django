@@ -41,8 +41,8 @@ function PaymentScreen() {
           <Col>
             <Form.Check
             type='radio'
-            label='MercadoPago o tarjeta de crédito/débito'
-            id='mercadopago'
+            label='Transferencia o efectivo'
+            id='transferencia'
             name='payment method'
             checked
             onChange={(e) => setPaymentMethod(e.target.value)}>
