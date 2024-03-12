@@ -59,13 +59,14 @@ function PlaceOrderScreen() {
         const orderDetails = placeOrder();
       
         // Crear una lista de nombres de productos separados por coma y espacio
-        const productNames = orderDetails.orderItems.map(item => item.name).join(', ');
+        const productNames = orderDetails.orderItems.map(item => item.name + `($${item.price})`).join(', ');
       
         // Construir el mensaje de WhatsApp
         const whatsappMessage = `¡Pedido realizado!\nDetalles del pedido:\n\n` +
           `Producto(s): ${productNames}\n` +
           `Dirección: ${orderDetails.shippingAddress.address}, ${orderDetails.shippingAddress.city}, ${orderDetails.shippingAddress.postalCode}, ${orderDetails.shippingAddress.country}\n` +
-          `Total: $${orderDetails.totalPrice}`;
+          
+          `\nTotal: $${orderDetails.totalPrice}`;
       
         const whatsappLink = `https://wa.me/+543455083098/?text=${encodeURIComponent(whatsappMessage)}`;
       
@@ -73,10 +74,7 @@ function PlaceOrderScreen() {
         window.open(whatsappLink, '_blank');
       };
 
-      const submitHandler = (e) =>{
-        e.preventDefault()
-        navigate('/')
-    }
+      
 
     return (
         <div>

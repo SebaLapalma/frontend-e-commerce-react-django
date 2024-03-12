@@ -16,7 +16,7 @@ function PaymentScreen() {
 
     const dispatch = useDispatch()
 
-    const [paymentMethod, setPaymentMethod] = useState('MercadoPago')
+    const [paymentMethod, setPaymentMethod] = useState('Transferencia o efectivo')
 
     if(!shippingAddress.address) {
         navigate('/shipping')

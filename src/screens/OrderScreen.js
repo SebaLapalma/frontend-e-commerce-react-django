@@ -31,8 +31,6 @@ function OrderScreen() {
         } else {
           // Realizar acciones adicionales después de cargar los detalles del pedido
           // Puedes ajustar esto según tus necesidades
-          const orderDetailsString = JSON.stringify(order, null, 2);
-          const whatsappMessage = `¡Pedido realizado!\nDetalles del pedido:\n${orderDetailsString}`;
           // Puedes utilizar 'whatsappMessage' como desees
         }
       }, [dispatch, order, orderId]);
