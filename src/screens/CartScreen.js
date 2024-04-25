@@ -99,7 +99,7 @@ function CartScreen() {
                         className='btn-block'
                         disabled={cartItems.length === 0}
                         onClick={checkoutHandler}>
-                              Envío
+                              Pagar
                         </Button>
                     </ListGroup.Item>
                 </Card>

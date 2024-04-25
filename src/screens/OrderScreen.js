@@ -1,46 +1,39 @@
-import React, {useEffect} from 'react'
-import { Col, Row, ListGroup, Image, Card, Button } from 'react-bootstrap'
-import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
-import { useParams } from 'react-router-dom'
-import { getOrderDetails } from '../actions/orderActions'
+import React, { useEffect } from 'react';
+import { Col, Row, ListGroup, Image, Card, Button } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import Message from '../components/Message';
+import Loader from '../components/Loader';
+import { useParams } from 'react-router-dom';
+import { getOrderDetails } from '../actions/orderActions';
 
 function OrderScreen() {
+    const navigate = useNavigate();
+    const { id } = useParams();
+    const orderId = Number(id);
 
-    const navigate = useNavigate()
+    const orderDetails = useSelector(state => state.orderDetails);
+    const { order, error, loading } = orderDetails;
+    const dispatch = useDispatch();
 
-    const {id} = useParams()
-
-    const orderId = Number(id)
-
-    const orderDetails = useSelector(state => state.orderDetails)
-
-    const {order, error, loading} = orderDetails
-
-    const dispatch = useDispatch()
-
-    if (!loading && !error){
-        order.itemsPrice = order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+    if (!loading && !error) {
+        order.itemsPrice = order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0);
     }
 
     useEffect(() => {
         if (!order || order._id !== Number(orderId)) {
-          dispatch(getOrderDetails(orderId));
+            dispatch(getOrderDetails(orderId));
         } else {
-          // Realizar acciones adicionales después de cargar los detalles del pedido
-          // Puedes ajustar esto según tus necesidades
-          // Puedes utilizar 'whatsappMessage' como desees
+            // Realizar acciones adicionales después de cargar los detalles del pedido
+            // Puedes ajustar esto según tus necesidades
+            // Puedes utilizar 'whatsappMessage' como desees
         }
-      }, [dispatch, order, orderId]);
+    }, [dispatch, order, orderId]);
 
-    console.log()
-
-    const submitHandler = (e) =>{
-        e.preventDefault()
-        navigate('/')
-    }
+    const submitHandler = (e) => {
+        e.preventDefault();
+        navigate('/');
+    };
 
     return loading ? (
         <Loader />
@@ -55,23 +48,27 @@ function OrderScreen() {
                         <ListGroup.Item>
                             <h2>Envío</h2>
                             <p><strong>Nombre: </strong>{order.user.name}</p>
-                            <p><strong>Email: </strong><a style={{textDecoration: 'none'}} href={`mailto: ${order.user.email}`}>{order.user.email}</a></p>
+                            <p><strong>Email: </strong><a style={{ textDecoration: 'none' }} href={`mailto: ${order.user.email}`}>{order.user.email}</a></p>
 
-                            <p>
-                                <strong>Envío: </strong>
-                                {order.shippingAddress.address}, {order.shippingAddress.city}
-                                {'    '}
-                                {order.shippingAddress.postalCode},
-                                {'    '}
-                                {order.shippingAddress.country}
-                            </p>
-                            { order.isDelivered ? (
-                                <Message variant='success'>Enviado en { order.deliveredAt }</Message>
+                            {order.shippingAddress ? (
+                                <p>
+                                    <strong>Envío: </strong>
+                                    {order.shippingAddress.address}, {order.shippingAddress.city}
+                                    {''}
+                                    {order.shippingAddress.postalCode},
+                                    {''}
+                                    {order.shippingAddress.country}
+                                </p>
+                            ) : (
+                                <p><strong>Envío: </strong> Lo retira en sucursal</p>
+                            )}
+
+                            {order.isDelivered ? (
+                                <Message variant='success'>Enviado en {order.deliveredAt}</Message>
                             ) : (
                                 <Message variant='warning'>No enviado</Message>
                             )}
                         </ListGroup.Item>
-                        
 
                         <ListGroup.Item>
                             <h2>Método de pago</h2>
@@ -79,8 +76,8 @@ function OrderScreen() {
                                 <strong>Método: </strong>
                                 {order.paymentMethod}
                             </p>
-                            { order.isPaid ? (
-                                <Message variant='success'>Pagado en { order.paidAt }</Message>
+                            {order.isPaid ? (
+                                <Message variant='success'>Pagado en {order.paidAt}</Message>
                             ) : (
                                 <Message variant='warning'>No pagado</Message>
                             )}
@@ -88,9 +85,9 @@ function OrderScreen() {
 
                         <ListGroup.Item>
                             <h2>Productos</h2>
-                            {order.orderItems.length === 0 ? <Message variant='info'>
-                                Pedido vacío
-                            </Message> :(
+                            {order.orderItems.length === 0 ? (
+                                <Message variant='info'>Pedido vacío</Message>
+                            ) : (
                                 <ListGroup variant='flush'>
                                     {order.orderItems.map((item, index) => (
                                         <ListGroup.Item key={index}>
@@ -115,7 +112,7 @@ function OrderScreen() {
 
                     </ListGroup>
                 </Col>
-                
+
                 <Col md={4}>
                     <Card>
                         <ListGroup variant='flush'>
@@ -158,24 +155,23 @@ function OrderScreen() {
                                     </Col>
                                 </Row>
                             </ListGroup.Item>
-                                
+
                             <ListGroup.Item>
                                 <Button
                                     type='button'
                                     className='btn-block'
                                     onClick={submitHandler}
-                                    >
+                                >
                                     Confirmar
                                 </Button>
                             </ListGroup.Item>
-                            
+
                         </ListGroup>
                     </Card>
                 </Col>
             </Row>
         </div>
-  )
+    );
 }
 
-
-export default OrderScreen
+export default OrderScreen;
