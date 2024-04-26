@@ -46,16 +46,16 @@ function Header() {
                 </LinkContainer>
               )}
               <NavDropdown title="Redes" id="collasible-nav-dropdown">
-                <NavDropdown.Item>
-                  <a style={{ textDecoration: 'none' }} rel="noopener noreferrer" href="https://www.facebook.com/profile.php?id=100088168151860" target="_blank">Facebook</a>
-                </NavDropdown.Item>
-                <NavDropdown.Item>
-                  <a style={{ textDecoration: 'none' }} rel="noopener noreferrer" href="https://www.instagram.com/nuna.fragancias/" target="_blank">Instagram</a>
-                </NavDropdown.Item>
+                <NavDropdown.Item href="https://www.facebook.com/profile.php?id=100088168151860" target="_blank">Facebook</NavDropdown.Item>
+                <NavDropdown.Item href="https://www.instagram.com/nuna.fragancias/" target="_blank">Instagram</NavDropdown.Item>
               </NavDropdown>
             </Nav>
             <Nav>
-              <Nav.Link href="/search">Buscar</Nav.Link> {/* Cambia a Nav.Link */}
+              <LinkContainer to="/search">
+                <Nav.Link>
+                <i className="fas fa-search"></i>Buscar
+                </Nav.Link>
+              </LinkContainer>
               <LinkContainer to="/50ml">
                 <Nav.Link>50ml</Nav.Link>
               </LinkContainer>

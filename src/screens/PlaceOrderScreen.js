@@ -68,6 +68,8 @@ function PlaceOrderScreen() {
     
         // Abrir WhatsApp en una nueva pestaña
         window.open(whatsappLink, '_blank');
+
+        navigate('/')
     };
 
     return (
