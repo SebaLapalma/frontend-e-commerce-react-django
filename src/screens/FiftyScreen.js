@@ -15,7 +15,6 @@ function HomenajeScreen() {
     dispatch(listProducts());
   }, [dispatch]);
 
-  // Filtrar productos que contienen la palabra 'homenaje'
   const homenajeProducts = products.filter(product =>
     product.name.toLowerCase().includes('50ml')
   );
