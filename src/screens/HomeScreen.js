@@ -18,7 +18,7 @@ function HomeScreen() {
 
   return (
     <div>
-        <h1>Últimos ingresos</h1>
+        <h1>Todos los productos</h1>
         {loading ? <Loader />
             :error ? <Message variant='danger'>{error}</Message>
             :
