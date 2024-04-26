@@ -22,6 +22,17 @@ function ProductScreen() {
     navigate(`/cart/${id}?qty=${qty}`);
   }
 
+  const handleOrder = () => {
+    // Construir el mensaje de WhatsApp
+    const whatsappMessage = `No hay stock de lo que estoy buscando, ¿Podrías hacer el pedido? Lo que quiero es un ${product.name}`;
+
+    // Construir el enlace de WhatsApp
+    const whatsappLink = `https://wa.me/+543455083098/?text=${encodeURIComponent(whatsappMessage)}`;
+
+    // Abrir WhatsApp en una nueva pestaña
+    window.open(whatsappLink, '_blank');
+  };
+
   return (
       <div>
         <Link to="/" className="btn btn-light my-3">Atrás</Link>
@@ -42,11 +53,7 @@ function ProductScreen() {
                   <ListGroup.Item>
                     <h3>{product.name}</h3>
                   </ListGroup.Item>
-                  
-                  {/* <ListGroup.Item>
-                    <Rating value={product.rating} text={`${product.numReviews} reseñas`} color={'#f8e825'} />
-                  </ListGroup.Item> */}
-                  
+
                   <ListGroup.Item>
                     {product.description}
                   </ListGroup.Item>
@@ -115,6 +122,14 @@ function ProductScreen() {
                         Añadir al carrito
                       </Button>
                     </ListGroup.Item>
+
+                    {product.stock === 0 && (
+                    <ListGroup.Item>
+                      <Button onClick={handleOrder} className="btn-block" type="button">
+                        Encargar
+                      </Button>
+                    </ListGroup.Item>
+                  )}
     
                   </ListGroup>
                 </Card>
