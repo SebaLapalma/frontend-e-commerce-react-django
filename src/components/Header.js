@@ -6,6 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { LinkContainer } from 'react-router-bootstrap';
 import { logout } from '../actions/userActions';
+import './Header.css'
 
 function Header() {
   const userLogin = useSelector((state) => state.userLogin);
@@ -21,7 +22,7 @@ function Header() {
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>NUNA FRAGANCIAS</Navbar.Brand>
+            <Navbar.Brand className='title-card'>NUNA FRAGANCIAS</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
