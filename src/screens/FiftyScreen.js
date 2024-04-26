@@ -17,21 +17,9 @@ function HomenajeScreen() {
     dispatch(listProducts());
   }, [dispatch]);
 
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(keyword.toLowerCase())
-  );
-
   return (
     <div>
       <h1>Perfumes de 50ml</h1>
-      <Form>
-        <Form.Control
-          type="text"
-          placeholder="Buscar perfumes..."
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-        />
-      </Form>
       {loading ? (
         <Loader />
       ) : error ? (
